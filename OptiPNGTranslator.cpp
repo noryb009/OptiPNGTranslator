@@ -174,9 +174,14 @@ OptiPNGTranslator::DerivedTranslate(BPositionIO *source,
 		
 		off_t fileSize;
 		tempFile.GetSize(&fileSize);
-		unsigned char buffer[fileSize];
+		unsigned char *buffer;
+		
+		buffer = new unsigned char[fileSize];
+		if(buffer == NULL)
+			return B_ERROR;
 		tempFile.ReadAt(0, buffer, fileSize);
 		target->Write(buffer, fileSize);
+		delete [] buffer;
 		
 		// delete the file
 		BEntry entry = BEntry(tempFilePath);
