@@ -61,7 +61,7 @@ const uint32 kNumDefaultSettings = sizeof(sDefaultSettings)
 	/ sizeof(TranSetting);
 
 OptiPNGTranslator::OptiPNGTranslator()
-	: BaseTranslator("OptiPNG", 
+	: BaseTranslator("Optimized PNG image", 
 		"OptiPNG Translator",
 		OPTIPNG_TRANSLATOR_VERSION,
 		sInputFormats, kNumInputFormats,
