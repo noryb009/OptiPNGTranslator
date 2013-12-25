@@ -100,6 +100,8 @@ OptiPNGTranslator::DerivedIdentify(BPositionIO *source,
 	strcpy(info->name, sInputFormats[0].name);
 	strcpy(info->MIME, sInputFormats[0].MIME);
 	
+	delete originalbmp;
+	
 	return B_OK;
 }
 
