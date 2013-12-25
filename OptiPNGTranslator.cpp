@@ -145,6 +145,8 @@ OptiPNGTranslator::DerivedTranslate(BPositionIO *source,
 			optipng = "optipng";
 		} else if(system("optipng-x86 &> /dev/null") == 0) {
 			optipng = "optipng-x86";
+		} else {
+			return B_ERROR;
 		}
 		
 		// optipng -clobber -out (file) (file)
