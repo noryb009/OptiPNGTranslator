@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+
+#include <Catalog.h>
 #include <FindDirectory.h>
 #include <TranslatorRoster.h>
 
@@ -19,7 +21,10 @@ const char *kDocumentCount = "/documentCount";
 const char *kDocumentIndex = "/documentIndex";
 
 #define kPngMimeType "image/png"
-#define kPngName "Optimized PNG Image"
+#define kPngName "Optimized PNG images"
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "OptimizedPNGTranslator"
 
 // The input formats that this translator supports.
 static const translation_format sInputFormats[] = {
@@ -61,8 +66,8 @@ const uint32 kNumDefaultSettings = sizeof(sDefaultSettings)
 	/ sizeof(TranSetting);
 
 OptiPNGTranslator::OptiPNGTranslator()
-	: BaseTranslator("Optimized PNG image", 
-		"OptiPNG Translator",
+	: BaseTranslator(B_TRANSLATE("Optimized PNG images"), 
+		"OptiPNG image translator",
 		OPTIPNG_TRANSLATOR_VERSION,
 		sInputFormats, kNumInputFormats,
 		sOutputFormats, kNumOutputFormats,
@@ -91,7 +96,7 @@ OptiPNGTranslator::DerivedIdentify(BPositionIO *source,
 	if(originalbmp == NULL) {
 		return B_NO_TRANSLATOR;
 	}
-	
+
 	info->type = sInputFormats[0].type;
 	info->translator = 0;
 	info->group = sInputFormats[0].group;
@@ -99,9 +104,9 @@ OptiPNGTranslator::DerivedIdentify(BPositionIO *source,
 	info->capability = sInputFormats[0].capability;
 	strcpy(info->name, sInputFormats[0].name);
 	strcpy(info->MIME, sInputFormats[0].MIME);
-	
+
 	delete originalbmp;
-	
+
 	return B_OK;
 }
 
@@ -118,26 +123,26 @@ OptiPNGTranslator::DerivedTranslate(BPositionIO *source,
 		BString tempFilePath;
 		if(find_directory(B_SYSTEM_TEMP_DIRECTORY, &tempDir) != B_OK )
 			return B_ERROR;
-		
+
 		tempFilePath.Append(tempDir.Path())
 			.Append("/OptiPNGTranslator.XXXXXX");
-		
+
 		tempFileFD = mkstemp(tempFilePath.LockBuffer(0));
 		tempFilePath.UnlockBuffer();
-		
+
 		if(tempFileFD == -1)
 			return B_ERROR;
 		close(tempFileFD);
-		
+
 		BFile tempFile = BFile(tempFilePath, O_WRONLY);
-		
+
 		// write PNG to file
 		off_t sourceSize;
 		source->GetSize(&sourceSize);
-		
+
 		BTranslatorRoster *roster = BTranslatorRoster::Default();
 		roster->Translate(source, NULL, NULL, &tempFile, (uint32)B_PNG_FORMAT);
-		
+
 		// optimize file
 		BString optipng;
 		if(system("optipng &> /dev/null") == 0) {
@@ -147,7 +152,7 @@ OptiPNGTranslator::DerivedTranslate(BPositionIO *source,
 		} else {
 			return B_ERROR;
 		}
-		
+
 		// optipng -clobber -out (file) (file)
 		BString command;
 		command = optipng;
@@ -157,7 +162,7 @@ OptiPNGTranslator::DerivedTranslate(BPositionIO *source,
 			command += " -nc";
 		if(!fSettings->SetGetBool(OPTIPNG_SETTING_PALETTE_REDUCTION))
 			command += " -np";
-		
+
 		command.Append(" -o")
 			.Append((char)(fSettings->
 				SetGetInt32(OPTIPNG_SETTING_OPTIMIZATION_LEVEL)+'0'),1);
@@ -167,29 +172,29 @@ OptiPNGTranslator::DerivedTranslate(BPositionIO *source,
 			.Append(" ")
 			.Append(tempFilePath)
 		;
-		
+
 		if(system(command) != 0) {
 			return B_ERROR;
 		}
-		
+
 		// read the file
 		tempFile = BFile(tempFilePath, O_RDONLY);
-		
+
 		off_t fileSize;
 		tempFile.GetSize(&fileSize);
 		unsigned char *buffer;
-		
+
 		buffer = new unsigned char[fileSize];
 		if(buffer == NULL)
 			return B_ERROR;
 		tempFile.ReadAt(0, buffer, fileSize);
 		target->Write(buffer, fileSize);
 		delete [] buffer;
-		
+
 		// delete the file
 		BEntry entry = BEntry(tempFilePath);
 		entry.Remove();
-		
+
 		return B_OK;
 	}
 	return B_NO_TRANSLATOR;

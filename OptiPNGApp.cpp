@@ -16,7 +16,7 @@ main(int /*argc*/, char ** /*argv*/)
 	BApplication app("application/x-vnd.Haiku-OptiPNGTranslator");
 
 	status_t result;
-	result = LaunchTranslatorWindow(new OptiPNGTranslator, 
+	result = LaunchTranslatorWindow(new OptiPNGTranslator,
 		"OptiPNG Translator Info", BRect(0, 0, 320, 200));
 	if (result != B_OK)
 		return 1;

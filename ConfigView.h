@@ -24,7 +24,7 @@ class ConfigView : public BGroupView {
 	private:
 		void 		MessageReceived(BMessage *message);
 		void 		AllAttached();
-		
+
 		TranslatorSettings	*fSettings;
 		BTextView			*fCopyrightView;
 		BSlider				*fOptimizationLevel;
