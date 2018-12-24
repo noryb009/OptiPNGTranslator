@@ -134,7 +134,6 @@ OptiPNGTranslator::DerivedTranslate(BPositionIO *source,
 		// write PNG to file
 		off_t sourceSize;
 		source->GetSize(&sourceSize);
-		unsigned char sourceChars[sourceSize];
 		
 		BTranslatorRoster *roster = BTranslatorRoster::Default();
 		roster->Translate(source, NULL, NULL, &tempFile, (uint32)B_PNG_FORMAT);
