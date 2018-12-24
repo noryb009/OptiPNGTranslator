@@ -54,7 +54,7 @@ ConfigView::ConfigView(TranslatorSettings *settings)
 	stringView->SetExplicitAlignment(leftAlignment);
 	AddChild(stringView);
 
-	AddChild(BSpaceLayoutItem::CreateVerticalStrut(spacing));
+	AddChild(BSpaceLayoutItem::CreateVerticalStrut(spacing * 2));
 
 	fOptimizationLevel = new BSlider(
 		"optimization",
@@ -67,6 +67,8 @@ ConfigView::ConfigView(TranslatorSettings *settings)
 	fOptimizationLevel->SetValue(
 		fSettings->SetGetInt32(OPTIPNG_SETTING_OPTIMIZATION_LEVEL));
 	AddChild(fOptimizationLevel);
+
+	AddChild(BSpaceLayoutItem::CreateVerticalStrut(spacing));
 
 	fBitDepthCheckBox = new BCheckBox((char*)OPTIPNG_SETTING_BIT_DEPTH_REDUCTION,
 		B_TRANSLATE("Reduce bit depth"), new BMessage(kMsgBitDepth));
