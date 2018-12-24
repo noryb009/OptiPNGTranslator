@@ -27,7 +27,7 @@ ConfigView::ConfigView(TranslatorSettings *settings)
 	: BGroupView("OptiPNGTranslator Settings", B_VERTICAL, 0)
 {
 	fSettings = settings;
-	
+
 	BAlignment leftAlignment(B_ALIGN_LEFT, B_ALIGN_VERTICAL_UNSET);
 
 	BStringView *stringView = new BStringView("title",
@@ -55,7 +55,7 @@ ConfigView::ConfigView(TranslatorSettings *settings)
 	AddChild(stringView);
 
 	AddChild(BSpaceLayoutItem::CreateVerticalStrut(spacing));
-	
+
 	fOptimizationLevel = new BSlider(
 		"optimization",
 		B_TRANSLATE("Optimization level:"), new BMessage(kMsgOptim),
@@ -67,30 +67,30 @@ ConfigView::ConfigView(TranslatorSettings *settings)
 	fOptimizationLevel->SetValue(
 		fSettings->SetGetInt32(OPTIPNG_SETTING_OPTIMIZATION_LEVEL));
 	AddChild(fOptimizationLevel);
-	
+
 	fBitDepthCheckBox = new BCheckBox((char*)OPTIPNG_SETTING_BIT_DEPTH_REDUCTION,
 		B_TRANSLATE("Reduce bit depth"), new BMessage(kMsgBitDepth));
 	if (fSettings->SetGetBool(OPTIPNG_SETTING_BIT_DEPTH_REDUCTION))
 		fBitDepthCheckBox->SetValue(B_CONTROL_ON);
 	AddChild(fBitDepthCheckBox);
-	
+
 	fColorTypeCheckBox = new BCheckBox((char*)OPTIPNG_SETTING_COLOR_TYPE_REDUCTION,
 		B_TRANSLATE("Reduce color type"), new BMessage(kMsgColorType));
 	if (fSettings->SetGetBool(OPTIPNG_SETTING_COLOR_TYPE_REDUCTION))
 		fColorTypeCheckBox->SetValue(B_CONTROL_ON);
 	AddChild(fColorTypeCheckBox);
-	
+
 	fPaletteCheckBox = new BCheckBox((char*)OPTIPNG_SETTING_PALETTE_REDUCTION,
 		B_TRANSLATE("Reduce palette size"), new BMessage(kMsgPaletteReduc));
 	if (fSettings->SetGetBool(OPTIPNG_SETTING_PALETTE_REDUCTION))
 		fPaletteCheckBox->SetValue(B_CONTROL_ON);
 	AddChild(fPaletteCheckBox);
-	
+
 	AddChild(BSpaceLayoutItem::CreateGlue());
-	GroupLayout()->SetInsets(B_USE_DEFAULT_SPACING, B_USE_DEFAULT_SPACING, 
+	GroupLayout()->SetInsets(B_USE_DEFAULT_SPACING, B_USE_DEFAULT_SPACING,
 		B_USE_DEFAULT_SPACING, B_USE_DEFAULT_SPACING);
 
-	SetExplicitPreferredSize(GroupLayout()->MinSize());		
+	SetExplicitPreferredSize(GroupLayout()->MinSize());
 }
 
 ConfigView::~ConfigView()
@@ -112,7 +112,7 @@ ConfigView::MessageReceived(BMessage* message)
 		{ OPTIPNG_SETTING_PALETTE_REDUCTION, kMsgPaletteReduc, TRAN_SETTING_BOOL },
 		{ NULL }
 	};
-	
+
 	int i;
 	for (i = 0; maps[i].name != NULL; i++) {
 		if (maps[i].what == message->what)

@@ -60,7 +60,7 @@ class OptiPNGTranslator : public BaseTranslator {
 		virtual status_t DerivedCanHandleImageSize(float width,
 			float height) const;
 
-		virtual BView *NewConfigView(TranslatorSettings *settings);	
+		virtual BView *NewConfigView(TranslatorSettings *settings);
 
 	protected:
 		virtual ~OptiPNGTranslator();
