@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+
+#include <Catalog.h>
 #include <FindDirectory.h>
 #include <TranslatorRoster.h>
 
@@ -19,7 +21,10 @@ const char *kDocumentCount = "/documentCount";
 const char *kDocumentIndex = "/documentIndex";
 
 #define kPngMimeType "image/png"
-#define kPngName "Optimized PNG Image"
+#define kPngName "Optimized PNG images"
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "OptimizedPNGTranslator"
 
 // The input formats that this translator supports.
 static const translation_format sInputFormats[] = {
@@ -61,8 +66,8 @@ const uint32 kNumDefaultSettings = sizeof(sDefaultSettings)
 	/ sizeof(TranSetting);
 
 OptiPNGTranslator::OptiPNGTranslator()
-	: BaseTranslator("Optimized PNG image", 
-		"OptiPNG Translator",
+	: BaseTranslator(B_TRANSLATE("Optimized PNG images"), 
+		"OptiPNG image translator",
 		OPTIPNG_TRANSLATOR_VERSION,
 		sInputFormats, kNumInputFormats,
 		sOutputFormats, kNumOutputFormats,

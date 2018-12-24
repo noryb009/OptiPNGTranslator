@@ -10,6 +10,6 @@ resource app_version {
 	minor  = 1,
 	variety = 0,
 	internal = 0,
-	short_info = "0.0.1",
-	long_info = "Haiku OptiPNG PNG Optimizer Translator Add-Ons."
+	short_info = "Translator for optimized PNG images",
+	long_info = "Reduced image size by optimizing PNGs"
 };
