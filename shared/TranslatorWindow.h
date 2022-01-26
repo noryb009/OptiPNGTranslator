@@ -38,13 +38,12 @@
 #include <View.h>
 #include <Window.h>
 
-#define B_TRANSLATE
 
 class TranslatorWindow : public BWindow {
 public:
 	TranslatorWindow(BRect area, const char *title);
 		// Sets up a BWindow with bounds area
-		
+
 	~TranslatorWindow();
 		// Posts a quit message so that the application closes properly
 };

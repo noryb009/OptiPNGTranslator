@@ -10,10 +10,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+
+#include <Catalog.h>
 #include <FindDirectory.h>
 #include <TranslatorRoster.h>
 
 #include "ConfigView.h"
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "OptiPNGTranslator"
 
 const char *kDocumentCount = "/documentCount";
 const char *kDocumentIndex = "/documentIndex";
@@ -61,8 +66,8 @@ const uint32 kNumDefaultSettings = sizeof(sDefaultSettings)
 	/ sizeof(TranSetting);
 
 OptiPNGTranslator::OptiPNGTranslator()
-	: BaseTranslator("Optimized PNG image", 
-		"OptiPNG Translator",
+	: BaseTranslator(B_TRANSLATE("Optimized PNG image"),
+		B_TRANSLATE("OptiPNG Translator"),
 		OPTIPNG_TRANSLATOR_VERSION,
 		sInputFormats, kNumInputFormats,
 		sOutputFormats, kNumOutputFormats,
