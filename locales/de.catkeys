@@ -1,0 +1,15 @@
+1	German	application/x-vnd.Haiku-OptiPNGTranslator	3251660049
+High	ConfigView		Hoch
+Low	ConfigView		Niedrig
+Reduce palette size	ConfigView		Reduzierte Palettengröße
+Be Bitmap Format	BaseTranslator		Be Bitmap-Format
+Error	TranslatorWindow		Fehler
+Reduce color type	ConfigView		Reduzierter Farbtyp
+OptiPNG Translator	OptiPNGTranslator		OptiPNG-Translator
+Optimization level:	ConfigView		Optimierungsstufe:
+Optimized PNG image	OptiPNGTranslator		Optimiertes PNG-Bild
+OptiPNG Translator info	OptiPNGApp		OptiPNG Translator Info
+OptiPNG Translator	ConfigView		OptiPNG Translator
+Reduce bit depth	ConfigView		Reduzierte Bittiefe
+Unable to create the view.	TranslatorWindow		Der View konnte nicht erzeugt werden.
+OK	TranslatorWindow		OK

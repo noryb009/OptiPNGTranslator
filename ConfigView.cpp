@@ -8,11 +8,15 @@
 #include "ConfigView.h"
 #include "OptiPNGTranslator.h"
 
-#include <StringView.h>
-#include <SpaceLayoutItem.h>
+#include <Catalog.h>
 #include <ControlLook.h>
+#include <SpaceLayoutItem.h>
+#include <StringView.h>
 
 #include <stdio.h>
+
+#undef B_TRANSLATION_CONTEXT
+#define B_TRANSLATION_CONTEXT "ConfigView"
 
 static const uint32 kMsgOptim		= 'opti';
 static const uint32 kMsgBitDepth	= 'bitd';
@@ -20,13 +24,13 @@ static const uint32 kMsgColorType	= 'coty';
 static const uint32 kMsgPaletteReduc= 'palr';
 
 ConfigView::ConfigView(TranslatorSettings *settings)
-	: BGroupView("ICNSTranslator Settings", B_VERTICAL, 0)
+	: BGroupView("OptiPNGTranslator Settings", B_VERTICAL, 0)
 {
 	fSettings = settings;
-	
+
 	BAlignment leftAlignment(B_ALIGN_LEFT, B_ALIGN_VERTICAL_UNSET);
 
-	BStringView *stringView = new BStringView("title", "OptiPNG Translator");
+	BStringView *stringView = new BStringView("title", B_TRANSLATE("OptiPNG Translator"));
 	stringView->SetFont(be_bold_font);
 	stringView->SetExplicitAlignment(leftAlignment);
 	AddChild(stringView);
@@ -45,46 +49,48 @@ ConfigView::ConfigView(TranslatorSettings *settings)
 	AddChild(stringView);
 
 	stringView = new BStringView("my_copyright",
-		B_UTF8_COPYRIGHT "2013 Luke <noryb009@gmail.com>.");
+		B_UTF8_COPYRIGHT "2013 Luke <noryb009@gmail.com>");
 	stringView->SetExplicitAlignment(leftAlignment);
 	AddChild(stringView);
 
 	AddChild(BSpaceLayoutItem::CreateVerticalStrut(spacing));
-	
+
 	fOptimizationLevel = new BSlider(
 		"optimization",
-		"Optimization level:", new BMessage(kMsgOptim),
+		B_TRANSLATE("Optimization level:"), new BMessage(kMsgOptim),
 		0, 7, B_HORIZONTAL, B_BLOCK_THUMB);
 	fOptimizationLevel->SetHashMarks(B_HASH_MARKS_BOTTOM);
 	fOptimizationLevel->SetHashMarkCount(8);
-	fOptimizationLevel->SetLimitLabels("Low", "High");
+	fOptimizationLevel->SetLimitLabels(B_TRANSLATE("Low"), B_TRANSLATE("High"));
 	fOptimizationLevel->SetValue(
 		fSettings->SetGetInt32(OPTIPNG_SETTING_OPTIMIZATION_LEVEL));
 	AddChild(fOptimizationLevel);
-	
+
+	AddChild(BSpaceLayoutItem::CreateVerticalStrut(spacing));
+
 	fBitDepthCheckBox = new BCheckBox((char*)OPTIPNG_SETTING_BIT_DEPTH_REDUCTION,
-		"Reduce bit depth:", new BMessage(kMsgBitDepth));
+		B_TRANSLATE("Reduce bit depth"), new BMessage(kMsgBitDepth));
 	if (fSettings->SetGetBool(OPTIPNG_SETTING_BIT_DEPTH_REDUCTION))
 		fBitDepthCheckBox->SetValue(B_CONTROL_ON);
 	AddChild(fBitDepthCheckBox);
-	
+
 	fColorTypeCheckBox = new BCheckBox((char*)OPTIPNG_SETTING_COLOR_TYPE_REDUCTION,
-		"Reduce color type:", new BMessage(kMsgColorType));
+		B_TRANSLATE("Reduce color type"), new BMessage(kMsgColorType));
 	if (fSettings->SetGetBool(OPTIPNG_SETTING_COLOR_TYPE_REDUCTION))
 		fColorTypeCheckBox->SetValue(B_CONTROL_ON);
 	AddChild(fColorTypeCheckBox);
-	
+
 	fPaletteCheckBox = new BCheckBox((char*)OPTIPNG_SETTING_PALETTE_REDUCTION,
-		"Reduce palette size:", new BMessage(kMsgPaletteReduc));
+		B_TRANSLATE("Reduce palette size"), new BMessage(kMsgPaletteReduc));
 	if (fSettings->SetGetBool(OPTIPNG_SETTING_PALETTE_REDUCTION))
 		fPaletteCheckBox->SetValue(B_CONTROL_ON);
 	AddChild(fPaletteCheckBox);
-	
+
 	AddChild(BSpaceLayoutItem::CreateGlue());
-	GroupLayout()->SetInsets(B_USE_DEFAULT_SPACING, B_USE_DEFAULT_SPACING, 
+	GroupLayout()->SetInsets(B_USE_DEFAULT_SPACING, B_USE_DEFAULT_SPACING,
 		B_USE_DEFAULT_SPACING, B_USE_DEFAULT_SPACING);
 
-	SetExplicitPreferredSize(GroupLayout()->MinSize());		
+	SetExplicitPreferredSize(GroupLayout()->MinSize());
 }
 
 ConfigView::~ConfigView()
@@ -106,7 +112,7 @@ ConfigView::MessageReceived(BMessage* message)
 		{ OPTIPNG_SETTING_PALETTE_REDUCTION, kMsgPaletteReduc, TRAN_SETTING_BOOL },
 		{ NULL }
 	};
-	
+
 	int i;
 	for (i = 0; maps[i].name != NULL; i++) {
 		if (maps[i].what == message->what)
