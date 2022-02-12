@@ -1,0 +1,15 @@
+1	Russian	application/x-vnd.Haiku-OptiPNGTranslator	3251660049
+Be Bitmap Format	BaseTranslator		Растровый формат Be
+Error	TranslatorWindow		Ошибка
+OK	TranslatorWindow		OK
+Unable to create the view.	TranslatorWindow		Не удалось создать панель.
+High	ConfigView		Высокий
+Low	ConfigView		Низкий
+Optimization level:	ConfigView		Уровень оптимизации:
+OptiPNG Translator	ConfigView		Транслятор OptiPNG
+Reduce bit depth	ConfigView		Уменьшить грубину битности
+Reduce color type	ConfigView		Уменьшить тип цвета
+Reduce palette size	ConfigView		Уменьшить размер палитры
+Optimized PNG image	OptiPNGTranslator		PNG изображения (оптимизированные)
+OptiPNG Translator	OptiPNGTranslator		Транслятор OptiPNG
+OptiPNG Translator info	OptiPNGApp		Информация о трансляторе OptiPNG

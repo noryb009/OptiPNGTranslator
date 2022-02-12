@@ -1,0 +1,15 @@
+1	Turkish	application/x-vnd.Haiku-OptiPNGTranslator	3251660049
+Be Bitmap Format	BaseTranslator		Be Biteşlem Biçimi
+Error	TranslatorWindow		Hata
+OK	TranslatorWindow		Tamam
+Unable to create the view.	TranslatorWindow		Görünüm oluşturulamıyor.
+High	ConfigView		Yüksek
+Low	ConfigView		Düşük
+Optimization level:	ConfigView		İyileme düzeyi:
+OptiPNG Translator	ConfigView		OptiPNG Çevirmeni
+Reduce bit depth	ConfigView		Bit derinliğini azalt
+Reduce color type	ConfigView		Renk türünü azalt
+Reduce palette size	ConfigView		Palet boyutunu azalt
+Optimized PNG image	OptiPNGTranslator		İyilenmiş PNG görseli
+OptiPNG Translator	OptiPNGTranslator		OptiPNG Çeviricisi
+OptiPNG Translator info	OptiPNGApp		OptiPNG Çevirmen Bilgisi
