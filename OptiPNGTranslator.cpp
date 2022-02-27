@@ -24,7 +24,7 @@ const char *kDocumentCount = "/documentCount";
 const char *kDocumentIndex = "/documentIndex";
 
 #define kPngMimeType "image/png"
-#define kPngName "Optimized PNG Image"
+#define kPngName B_TRANSLATE_MARK("Optimized PNG image")
 
 // The input formats that this translator supports.
 static const translation_format sInputFormats[] = {

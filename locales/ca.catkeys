@@ -1,0 +1,15 @@
+1	Catalan	application/x-vnd.Haiku-OptiPNGTranslator	3251660049
+Be Bitmap Format	BaseTranslator		Format de mapa de bits del Be
+Error	TranslatorWindow		Error
+OK	TranslatorWindow		D'acord
+Unable to create the view.	TranslatorWindow		No es pot crear la vista.
+High	ConfigView		Alt
+Low	ConfigView		Baix
+Optimization level:	ConfigView		Nivell d'optimització:
+OptiPNG Translator	ConfigView		Traductor OptiPNG
+Reduce bit depth	ConfigView		Redueix la profunditat de bits
+Reduce color type	ConfigView		Redueix el tipus de color
+Reduce palette size	ConfigView		Redueix la mida de la paleta
+Optimized PNG image	OptiPNGTranslator		Imatge PNG optimitzada
+OptiPNG Translator	OptiPNGTranslator		Traductor OptiPNG
+OptiPNG Translator info	OptiPNGApp		Informació del traductor OptiPNG
